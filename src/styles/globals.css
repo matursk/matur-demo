@@ -1,16 +1,12 @@
-:root {
+﻿:root {
 	--glass-bg: rgba(255, 255, 255, 0.06);
 	--glass-border: rgba(255, 255, 255, 0.18);
-
-	/* Navbar water/glass controls (edit these to tune the navbar effect) */
-	--nav-opacity: 0.04; /* transparency of navbar background (lower = more transparent) */
-	--nav-border: rgba(255, 255, 255, 0.18); /* navbar border color */
-	--nav-blur: 0px; /* backdrop blur strength (0 = no blur) */
-	--nav-ripple-filter: url(#nav-ripple); /* reference to the SVG ripple filter */
-
-	/* Ripple intensity controls used by the inline SVG filter (best-effort across browsers) */
-	--ripple-scale: 0.04; /* very slight distortion */
-	--ripple-freq: 0.006; /* turbulence frequency */
+	--nav-opacity: 0.04;
+	--nav-border: rgba(255, 255, 255, 0.18);
+	--nav-blur: 0px;
+	--nav-ripple-filter: url(#nav-ripple);
+	--ripple-scale: 0.04;
+	--ripple-freq: 0.006;
 }
 
 * {
@@ -32,38 +28,30 @@ body {
 	-webkit-backdrop-filter: blur(8px);
 }
 
-/* Backdrop-filter fallback */
 @supports not ((-webkit-backdrop-filter: blur(8px)) or (backdrop-filter: blur(8px))) {
 	.glass {
 		background: rgba(255, 255, 255, 0.08);
 	}
 }
 
-/* Watery navbar (applies only where explicitly added) */
 .nav-water {
-	/* Transparent, glassy look tuned by CSS variables */
 	background: rgba(255, 255, 255, var(--nav-opacity));
 	border: 0;
-	/* stronger, editable blur for navbar only */
 	backdrop-filter: blur(var(--nav-blur)) saturate(105%);
 	-webkit-backdrop-filter: blur(var(--nav-blur)) saturate(105%);
-	/* Subtle autonomous ripple distortion via SVG filter */
 	filter: var(--nav-ripple-filter);
 }
 
 .nav-water--slight {
-	/* Very slight blur for navbar */
 	--nav-blur: 2px;
 }
 
-/* Fallback without backdrop-filter support */
 @supports not ((-webkit-backdrop-filter: blur(8px)) or (backdrop-filter: blur(8px))) {
 	.nav-water {
 		background: rgba(255, 255, 255, calc(var(--nav-opacity) + 0.02));
 	}
 }
 
-/* Focus styles for accessibility */
 :where(a, button, [role="button"], input, select, textarea) {
 	outline: none;
 }
@@ -72,7 +60,6 @@ body {
 	border-radius: 6px;
 }
 
-/* Reduced motion global */
 @media (prefers-reduced-motion: reduce) {
 	*, *::before, *::after {
 		animation-duration: 0.01ms !important;
@@ -80,15 +67,11 @@ body {
 		transition-duration: 0.01ms !important;
 		scroll-behavior: auto !important;
 	}
-	/* Disable/distill ripple intensity when user prefers reduced motion */
 	:root {
 		--ripple-scale: 0;
 	}
 }
 
-
-
-/* Typewriter caret animation */
 @keyframes caret-blink {
 	50% {
 		opacity: 0;
@@ -98,10 +81,9 @@ body {
 	animation: caret-blink 1s step-end infinite;
 }
 
-/* Hide scrollbars globally while preserving scroll (modern, subtle UI) */
 html, body {
-	-ms-overflow-style: none; /* IE and old Edge */
-	scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none;
+	scrollbar-width: none;
 }
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
@@ -109,7 +91,6 @@ body::-webkit-scrollbar {
 	height: 0;
 }
 
-/* Policy page content typographic styling */
 .policy-content :where(h1, h2, h3, h4, h5, h6) {
 	margin: 1.25rem 0 0.5rem;
 	font-weight: 600;
@@ -130,7 +111,6 @@ body::-webkit-scrollbar {
 }
 .policy-content a:hover { text-decoration-color: rgba(72,183,255,0.9); }
 
-/* Hide default number input spinners (we use custom +/- controls) */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
 	-webkit-appearance: none;
@@ -139,4 +119,3 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
 	-moz-appearance: textfield;
 }
-
