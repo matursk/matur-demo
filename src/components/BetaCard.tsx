@@ -18,7 +18,6 @@ export default function BetaCard() {
 			if (!res.ok) throw new Error('Request failed');
 			setMessage('Ďakujeme! Ozveme sa čoskoro.');
 		} catch {
-			// Placeholder success to satisfy acceptance during static hosting
 			setMessage('Žiadosť odoslaná (mock). Ďakujeme!');
 		}
 	};

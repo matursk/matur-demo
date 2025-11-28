@@ -48,7 +48,6 @@ export default function Typewriter({
 
 		let delay = isDeleting ? deleteSpeedMs : typeSpeedMs;
 
-		// Finished typing
 		if (!isDeleting && visibleCount >= chars.length) {
 			delay = pauseMs;
 			timeoutRef.current = window.setTimeout(() => setIsDeleting(true), delay);
@@ -57,7 +56,6 @@ export default function Typewriter({
 			};
 		}
 
-		// Finished deleting
 		if (isDeleting && visibleCount === 0) {
 			delay = 250;
 			timeoutRef.current = window.setTimeout(() => {

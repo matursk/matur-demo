@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { useEffect, useMemo, useState } from 'react';
 
 function sanitizeHtml(html: string): string {
-	// Very small sanitizer: allow only basic tags and safe attributes on <a>.
 	const allowedTags = new Set(['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'UL', 'OL', 'LI', 'STRONG', 'EM', 'A', 'BR']);
 	const parser = new DOMParser();
 	const doc = parser.parseFromString(html, 'text/html');
@@ -15,7 +14,6 @@ function sanitizeHtml(html: string): string {
 		const tag = el.tagName;
 
 		if (!allowedTags.has(tag)) {
-			// Flatten unknown tags by recursing into their children
 			const frag = document.createDocumentFragment();
 			el.childNodes.forEach((child) => {
 				const cleaned = walk(child);
@@ -25,12 +23,10 @@ function sanitizeHtml(html: string): string {
 		}
 
 		const safe = document.createElement(tag.toLowerCase());
-		// Preserve only safe attributes for anchors
 		if (tag === 'A') {
 			const href = el.getAttribute('href') || '';
 			if (href) {
 				safe.setAttribute('href', href);
-				// Force safe target/rel for external links
 				if (/^https?:\/\//i.test(href)) {
 					safe.setAttribute('target', '_blank');
 					safe.setAttribute('rel', 'noopener noreferrer');
@@ -62,7 +58,6 @@ export default function Cookies() {
 	useEffect(() => {
 		let cancelled = false;
 		(async () => {
-			// 1) Try same-origin static copy first (drop a full HTML into public/cookies-source.html)
 			try {
 				const local = await fetch('/cookies-source.html', { credentials: 'same-origin' });
 				if (!cancelled && local.ok) {
@@ -72,12 +67,10 @@ export default function Cookies() {
 				}
 			} catch {}
 
-			// 2) Attempt direct fetch (likely blocked by CORS, but try once)
 			try {
 				const res = await fetch('https://matur.sk/cookie-policy', { mode: 'cors' });
 				if (!cancelled && res.ok) {
 					const text = await res.text();
-					// Try to extract main/article if present
 					const parser = new DOMParser();
 					const doc = parser.parseFromString(text, 'text/html');
 					const candidate =
@@ -88,9 +81,7 @@ export default function Cookies() {
 				}
 			} catch {}
 
-			// 3) Fallback to CORS-friendly reader (text-only)
 			try {
-				// Try HTTPS target first, then HTTP (some sites redirect differently)
 				const res1 = await fetch('https://r.jina.ai/https://matur.sk/cookie-policy');
 				if (!cancelled && res1.ok) {
 					const text = await res1.text();
@@ -105,7 +96,6 @@ export default function Cookies() {
 				}
 			} catch {}
 
-			// 4) If everything fails, show error
 			if (!cancelled) setError('Nepodarilo sa načítať zásady cookies.');
 		})();
 		return () => {

@@ -12,11 +12,8 @@ import CommitmentTerms from './pages/CommitmentTerms';
 import Cennik from './pages/Cennik';
 
 export default function App() {
-	// Inform background for subtle parallax coupling
 	useEffect(() => {
-		const onCustomParallax = () => {
-			// Placeholder for coupling sections with background if needed
-		};
+		const onCustomParallax = () => {};
 		window.addEventListener('stars:parallax', onCustomParallax as EventListener);
 		return () => window.removeEventListener('stars:parallax', onCustomParallax as EventListener);
 	}, []);

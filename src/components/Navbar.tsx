@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 const links = [
@@ -11,6 +11,7 @@ const links = [
 
 export default function Navbar() {
 	const [compact, setCompact] = useState(false);
+	const [mobileOpen, setMobileOpen] = useState(false);
 	const { scrollY } = useScroll();
 	const shadowOpacity = useTransform(scrollY, [0, 100], [0, 0.35]);
 
@@ -21,10 +22,17 @@ export default function Navbar() {
 		return () => window.removeEventListener('scroll', onScroll);
 	}, []);
 
+	useEffect(() => {
+		const handleResize = () => {
+			if (window.innerWidth >= 768) setMobileOpen(false);
+		};
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	}, []);
+
 	return (
 		<motion.header
 			aria-label="Navigácia"
-			/* Watery navbar: class 'nav-water' enables ripple + adjustable CSS variables in globals.css */
 			className="glass nav-water fixed inset-x-0 top-0 z-30"
 			initial={{ y: -20, opacity: 0 }}
 			animate={{ y: 0, opacity: 1 }}
@@ -48,7 +56,7 @@ export default function Navbar() {
 					/>
 					<span className="text-white/90 text-base">Matur</span>
 				</Link>
-				<div className="flex items-center gap-6">
+				<div className="flex items-center gap-4 sm:gap-6">
 					<ul className="hidden md:flex items-center gap-6 text-base">
 						{links.map((l) => (
 							<li key={l.label}>
@@ -68,11 +76,75 @@ export default function Navbar() {
 						className="rounded-lg bg-primary px-4 py-2.5 text-base font-medium text-black hover:brightness-110 focus-visible:brightness-110 shadow-glow"
 						href="/#pricing"
 						aria-label="Prejsť na cenník"
+						onClick={() => setMobileOpen(false)}
 					>
 						Prejsť na cenník
 					</a>
+					<button
+						type="button"
+						className="md:hidden rounded-lg border border-white/25 bg-black/20 px-3 py-2 text-white transition hover:border-white/40 focus-visible:border-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+						onClick={() => setMobileOpen((open) => !open)}
+						aria-label="Otvoriť navigačné menu"
+						aria-expanded={mobileOpen}
+					>
+						<span className="relative block h-5 w-6">
+							<span
+								className={`absolute left-0 top-1 h-0.5 w-full rounded-full bg-current transition-all duration-200 ${
+									mobileOpen ? 'translate-y-[6px] rotate-45' : ''
+								}`}
+							/>
+							<span
+								className={`absolute left-0 bottom-1 h-0.5 w-full rounded-full bg-current transition-all duration-200 ${
+									mobileOpen ? '-translate-y-[6px] -rotate-45' : ''
+								}`}
+							/>
+						</span>
+					</button>
 				</div>
 			</nav>
+			<AnimatePresence>
+				{mobileOpen && (
+					<motion.div
+						className="md:hidden px-4 sm:px-6 pb-4"
+						initial={{ opacity: 0, y: -8 }}
+						animate={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -8 }}
+					>
+						<div className="rounded-2xl border border-white/10 bg-black/65 p-4 backdrop-blur-xl space-y-3">
+							<ul className="flex flex-col gap-2 text-base">
+								{links.map((l) => (
+									<li key={`mobile-${l.label}`}>
+										{l.href.startsWith('mailto:') ? (
+											<a
+												className="flex items-center justify-between rounded-lg px-3 py-2 text-white/90 hover:bg-white/5 focus-visible:bg-white/10 focus-visible:outline-none"
+												href={l.href}
+												onClick={() => setMobileOpen(false)}
+											>
+												{l.label}
+											</a>
+										) : (
+											<Link
+												className="flex items-center justify-between rounded-lg px-3 py-2 text-white/90 hover:bg-white/5 focus-visible:bg-white/10 focus-visible:outline-none"
+												to={l.href}
+												onClick={() => setMobileOpen(false)}
+											>
+												{l.label}
+											</Link>
+										)}
+									</li>
+								))}
+							</ul>
+							<a
+								className="block w-full rounded-lg bg-primary px-4 py-2.5 text-center text-base font-semibold text-black shadow-glow hover:brightness-110 focus-visible:brightness-110"
+								href="/#pricing"
+								onClick={() => setMobileOpen(false)}
+							>
+								Prejsť na cenník
+							</a>
+						</div>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</motion.header>
 	);
 }

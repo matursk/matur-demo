@@ -1,9 +1,3 @@
-// Canvas-based autonomous starfield that renders behind content.
-// Settings live in src/starfieldConfig.ts — edit star count, speed, sizes, twinkle, and motion there.
-// Performance notes:
-// - Respects prefers-reduced-motion (fewer/slower stars, no twinkle).
-// - Pauses drawing when the tab is hidden.
-// - Density scales with viewport area to keep a consistent look.
 import { useEffect, useRef } from 'react';
 import { starfieldConfig as CONFIG } from '../starfieldConfig';
 
@@ -14,17 +8,13 @@ export default function StarsBackground() {
 		: false;
 
 	useEffect(() => {
-		// Canvas setup
 		const canvas = canvasRef.current!;
 		const ctx = canvas.getContext('2d')!;
 
-		// Derived effective config, respecting reduced motion
 		const motionScale = CONFIG.motionScale * (prefersReducedMotion ? CONFIG.reducedMotionScale : 1);
 		const speed = CONFIG.starSpeed * motionScale;
 		const twinkleAmount = prefersReducedMotion ? 0 : CONFIG.twinkleAmount;
 
-		// Density scaling by viewport area to keep visual density roughly constant.
-		// Baseline area corresponds to 1920x1080.
 		const BASE_AREA = 1920 * 1080;
 
 		let width = (canvas.width = window.innerWidth);
@@ -36,8 +26,8 @@ export default function StarsBackground() {
 			x: number;
 			y: number;
 			r: number;
-			ax: number; // angle in radians for autonomous drift
-			speed: number; // per-star speed multiplier
+			ax: number;
+			speed: number;
 			twinklePhase: number;
 		};
 
@@ -83,7 +73,6 @@ export default function StarsBackground() {
 
 		const onVisibility = () => {
 			hidden = document.visibilityState === 'hidden';
-			// If becoming visible, restart the RAF loop immediately for snappy resume.
 			if (!hidden && !raf) {
 				lastTs = performance.now();
 				raf = requestAnimationFrame(draw);
@@ -93,14 +82,12 @@ export default function StarsBackground() {
 		window.addEventListener('resize', onResize);
 		document.addEventListener('visibilitychange', onVisibility);
 
-		// Autonomous starfield animation using requestAnimationFrame
 		function draw(ts: number) {
-			// Reduce processing when tab is not visible: skip drawing entirely.
 			if (hidden) {
 				raf = 0;
 				return;
 			}
-			const dt = Math.min(64, ts - lastTs) / 1000; // clamp dt to avoid large jumps
+			const dt = Math.min(64, ts - lastTs) / 1000;
 			lastTs = ts;
 
 			ctx.clearRect(0, 0, width, height);
@@ -109,23 +96,19 @@ export default function StarsBackground() {
 			for (let i = 0; i < stars.length; i++) {
 				const s = stars[i];
 
-				// Drift position (autonomous, not mouse-controlled)
 				const v = speed * s.speed;
 				s.x += Math.cos(s.ax) * v * dt;
-				s.y += Math.sin(s.ax) * v * dt * 0.6; // slightly less vertical movement for calmer feel
+				s.y += Math.sin(s.ax) * v * dt * 0.6;
 
-				// Wrap around edges
 				if (s.x < -4) s.x = width + 4;
 				else if (s.x > width + 4) s.x = -4;
 				if (s.y < -4) s.y = height + 4;
 				else if (s.y > height + 4) s.y = -4;
 
-				// Twinkle: subtle alpha modulation
 				s.twinklePhase += dt * (0.6 + s.speed * 0.8);
 				const alpha = 0.6 + Math.sin(s.twinklePhase) * 0.5 * twinkleAmount;
 				ctx.globalAlpha = Math.max(0.1, Math.min(1, alpha));
 
-				// Draw
 				ctx.beginPath();
 				ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
 				ctx.fill();

@@ -17,7 +17,6 @@ export default function OrderBase() {
 	const [commitYears, setCommitYears] = useState<number>(1);
 	const [paymentMode, setPaymentMode] = useState<'annual' | 'upfront'>('annual');
 
-	// Simple computed hint text
 	const teacherHint = useMemo(
 		() => '1 učiteľská licencia je zdarma',
 		[]
@@ -63,7 +62,6 @@ export default function OrderBase() {
 
 	const onSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		// In this basic version, just acknowledge success
 		setSubmittedMsg('Ďakujeme, vaša objednávka bola odoslaná (mock). Ozveme sa e‑mailom.');
 	};
 
@@ -73,19 +71,22 @@ export default function OrderBase() {
 				<h1 id="base-order" className="sr-only">
 					Objednávka — Základné licencie
 				</h1>
-				<FadeOnScroll>
-					<div className="mx-auto max-w-4xl">
-						<header className="mb-8 text-center">
+				<div className="mx-auto max-w-4xl space-y-8">
+					<FadeOnScroll appearY={26}>
+						<header className="text-center">
 							<p className="text-sm uppercase tracking-wider text-white/60">Základné licencie</p>
 							<h2 className="mt-2 text-2xl font-semibold">Objednávka</h2>
 						</header>
+					</FadeOnScroll>
 
-						<div className="glass rounded-2xl p-6 shadow-glass">
-							{submittedMsg ? (
+					<div className="glass rounded-2xl p-6 shadow-glass">
+						{submittedMsg ? (
+							<FadeOnScroll>
 								<p className="text-emerald-300">{submittedMsg}</p>
-							) : (
-								<form onSubmit={onSubmit} className="grid gap-8">
-									{/* Škola */}
+							</FadeOnScroll>
+						) : (
+							<form onSubmit={onSubmit} className="grid gap-8">
+								<FadeOnScroll className="contents">
 									<section aria-labelledby="school-info">
 										<h3 id="school-info" className="mb-3 text-lg font-semibold">
 											Údaje o škole
@@ -138,8 +139,9 @@ export default function OrderBase() {
 											</label>
 										</div>
 									</section>
+								</FadeOnScroll>
 
-									{/* Počty licencií */}
+								<FadeOnScroll className="contents">
 									<section aria-labelledby="quantities">
 										<h3 id="quantities" className="mb-3 text-lg font-semibold">
 											Počty licencií
@@ -162,8 +164,9 @@ export default function OrderBase() {
 											/>
 										</div>
 									</section>
+								</FadeOnScroll>
 
-									{/* Objednávateľ */}
+								<FadeOnScroll className="contents">
 									<section aria-labelledby="ordering-person">
 										<h3 id="ordering-person" className="mb-3 text-lg font-semibold">
 											Objednávateľ
@@ -199,8 +202,9 @@ export default function OrderBase() {
 											</label>
 										</div>
 									</section>
+								</FadeOnScroll>
 
-									{/* Fakturácia */}
+								<FadeOnScroll className="contents">
 									<section aria-labelledby="billing">
 										<h3 id="billing" className="mb-3 text-lg font-semibold">
 											Fakturácia
@@ -337,7 +341,9 @@ export default function OrderBase() {
 											</div>
 										)}
 									</section>
+								</FadeOnScroll>
 
+								<FadeOnScroll className="contents">
 									<section aria-labelledby="term-payment">
 										<h3 id="term-payment" className="mb-3 text-lg font-semibold">
 											Viazanosť a platba
@@ -378,11 +384,13 @@ export default function OrderBase() {
 											</div>
 										</div>
 										<p className="mt-2 text-xs text-white/70">
-											1–2 roky bez dodatočnej zľavy, 2–4 roky −5 %, 5 rokov −7 % na licencie. Maximálna viazanosť je {MAX_COMMIT_YEARS} rokov.
+											1–2 roky bez dodatočnej zľavy, 2–4 roky −5 %, 5 rokov −7 % na licencie. Maximálna viazanosť je {MAX_COMMIT_YEARS}{' '}
+											rokov.
 										</p>
 									</section>
+								</FadeOnScroll>
 
-									{/* Súhrn ceny */}
+								<FadeOnScroll className="contents">
 									<section aria-labelledby="summary">
 										<h3 id="summary" className="mb-3 text-lg font-semibold">
 											Súhrn ceny
@@ -437,7 +445,9 @@ export default function OrderBase() {
 											</div>
 										</div>
 									</section>
+								</FadeOnScroll>
 
+								<FadeOnScroll className="contents">
 									<div className="pt-2">
 										<button
 											type="submit"
@@ -446,11 +456,11 @@ export default function OrderBase() {
 											Odoslať objednávku
 										</button>
 									</div>
-								</form>
-							)}
-						</div>
+								</FadeOnScroll>
+							</form>
+						)}
 					</div>
-				</FadeOnScroll>
+				</div>
 			</section>
 		</main>
 	);

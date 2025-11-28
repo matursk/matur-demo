@@ -14,7 +14,6 @@ export function useScrollUnlock() {
 			const y = window.scrollY;
 			const vh = window.innerHeight;
 
-			// thresholds tuned for smoothness
 			if (y < vh * 0.5) {
 				setState('heroVisible');
 			} else if (y < vh * 1.2) {

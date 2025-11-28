@@ -5,7 +5,6 @@ import './styles/tailwind.css';
 import './styles/globals.css';
 import { BrowserRouter } from 'react-router-dom';
 
-// Optional lightweight mock for /api/beta during dev
 if (import.meta.env.DEV) {
 	const originalFetch = window.fetch.bind(window);
 	window.fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
