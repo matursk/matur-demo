@@ -2,23 +2,23 @@ import { motion } from 'framer-motion';
 
 const steps = [
 	{
-		title: 'Krok 1',
-		desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+		title: 'Diagnostika školy a cieľov',
+		desc: 'Krátky onboarding s vedením aj predmetovými komisiami. Zmapujeme maturitné okruhy, výsledky a priority jednotlivých odborov.',
 		Icon: RocketIcon,
 	},
 	{
-		title: 'Krok 2',
-		desc: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+		title: 'Obsah naviazaný na maturitu',
+		desc: 'Z nášho jadra lekcií vyberieme relevantné témy a doplníme ukážkové príklady, videá či úplne nové lekcie podľa sylabu školy.',
 		Icon: TargetIcon,
 	},
 	{
-		title: 'Krok 3',
-		desc: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
+		title: 'Digitálna skúsenosť pre študentov',
+		desc: 'Študenti získajú licencie do aplikácie s 10/20/30-minútovými blokmi, adaptívnym opakovaním, pripomienkami a okamžitou spätnou väzbou.',
 		Icon: ChartIcon,
 	},
 	{
-		title: 'Krok 4',
-		desc: 'Duis aute irure dolor in reprehenderit in voluptate velit.',
+		title: 'Reporty a podpora pre učiteľov',
+		desc: 'Učitelia vidia pokrok a odporúčania tém, k dispozícii majú support tím a rýchle kanály na spätnú väzbu aj nové požiadavky.',
 		Icon: BadgeIcon,
 	},
 ];

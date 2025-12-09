@@ -1,11 +1,26 @@
 import { motion } from 'framer-motion';
 
 const features = [
-	{ title: 'Funkcia 1', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-	{ title: 'Funkcia 2', desc: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-	{ title: 'Funkcia 3', desc: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco.' },
-	{ title: 'Funkcia 4', desc: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
-	{ title: 'Funkcia 5', desc: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa.' },
+	{
+		title: 'Maturitné okruhy a modelové zadania',
+		desc: 'Lekcie sú tesne naviazané na otázky z maturít – s postupmi riešenia, vysvetlením správnych odpovedí a odporúčanou stratégiou.',
+	},
+	{
+		title: 'Adaptívne cvičenia v 10/20/30-min blokoch',
+		desc: 'Študenti si volia dĺžku session podľa rozvrhu, systém sleduje chyby a odporúča ďalší obsah, aby sa učili len to, čo potrebujú.',
+	},
+	{
+		title: 'Inteligentné pripomienky a plánovanie',
+		desc: 'Automatické notifikácie pripomenú dôležité termíny, testy či slabé témy a pomôžu vybudovať konzistentný rytmus prípravy.',
+	},
+	{
+		title: 'Motivácia cez ciele, streaky a odmeny',
+		desc: 'Denné ciele, série dní a virtuálne badge zvyšujú zapojenie, pričom učitelia okamžite vidia, kto potrebuje povzbudenie.',
+	},
+	{
+		title: 'Prehľady pre vedenie a podporu',
+		desc: 'Dashboardy ukazujú progres tried, najčastejšie chyby a odporúčané témy; náš tím reaguje na podnety školy prakticky v reálnom čase.',
+	},
 ];
 
 export default function Features() {

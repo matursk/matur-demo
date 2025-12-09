@@ -1,0 +1,323 @@
+Matur – Android Beta Website (React/Vite) – In‑Depth Content Summary
+===============================================================
+
+1. Overall purpose and audience
+-------------------------------
+
+The website presents “Matur”, a Slovak Android application designed to help secondary‑school students
+prepare for their school‑leaving exams (“maturity”). The site’s public part serves mainly as:
+
+- A landing page explaining what the app does and why it exists.
+- An announcement and information hub for a closed Android beta programme.
+- An FAQ for prospective or accepted beta testers.
+- A legal and privacy section (Beta policy and closed‑beta terms, CBETA).
+
+A separate, login‑protected section (“CBETA”) is aimed at invited testers. It provides a simple
+dashboard with APK download instructions, links to the bug‑reporting console and the contractual
+terms governing the closed beta.
+
+The site is written in Slovak and is built with React + TypeScript, Vite, Tailwind‑style utility
+classes, Firebase (authentication, hosting/storage, analytics) and Cloudflare (via wrangler config).
+
+
+2. Public homepage (“Root” route)
+---------------------------------
+
+### 2.1 Hero section and main value proposition
+
+The homepage opens with the slogan:
+
+- “Zmaturuj s ľahkosťou” – roughly “Pass your maturita with ease”.
+
+Visitors are invited to join the Android beta programme, with the explicit promise that the app will
+help them prepare for the exams “simply and quickly”. Immediately, the site states that **beta
+sign‑ups are already closed** (“Prihlasovanie uzavreté”).
+
+The hero and first content blocks stress three main selling points:
+
+1. **Direct focus on maturita exams**
+   - Content and exercises are tied directly to maturita topics and exam areas.
+   - Includes model exam questions, step‑by‑step solution procedures, explanations of correct
+     answers and strategy tips.
+   - Short quizzes with instant feedback help students quickly identify what they already know and
+     what needs more practice.
+
+2. **Adapted to students’ real life**
+   - Lessons are deliberately short and easy to understand, with language stripped of unnecessary
+     “balast”.
+   - The app uses *adaptive repetition* based on the user’s mistakes.
+   - It can send reminders before important dates.
+   - There are study modes tailored to 10, 20 or 30‑minute sessions so that students can fit
+     practice around other obligations.
+
+3. **Help to actually succeed, not just “provide content”**
+   - The app tracks progress and offers an overview of how the student is doing.
+   - There are daily goals, streaks (series of days in a row) and badges to support motivation.
+   - Topic recommendations are driven by the student’s results.
+   - The app sends intelligent reminders.
+   - During the beta period, testers are encouraged to report bugs directly in the app; this is
+     framed as a collaborative process where the app “improves together with you”.
+
+Overall, the homepage paints Matur as a focused, exam‑oriented learning companion that combines
+structured content with motivational and adaptive features.
+
+### 2.2 Beta programme: capacity, duration and participation
+
+The homepage then offers a concise description of the **beta plan and capacity**:
+
+- Capacity: **10 seats** in the closed beta.
+- Status: **beta is running** (“Beta je spustená”) and will continue **until 1.11.2025**.
+- Selected users receive an APK build of the app via e‑mail.
+- After installation they log in using the e‑mail address provided in the application form.
+- Their task is to actually use the app for maturita preparation and to report bugs through the
+  integrated bug‑reporting flow (in‑app Settings → “Nahlásiť chybu”).
+
+A reward scheme is explicitly mentioned:
+
+- For every **confirmed bug report**, the team plans to pay **5 EUR**. This incentivises thorough and
+  precise reporting.
+
+### 2.3 Roadmap and product evolution
+
+A dedicated “Roadmapa” section visually and textually outlines the app’s development timeline:
+
+- **1.9.2025 – Idea**  
+  The idea to create an app to help maturita students is born.
+
+- **5.9.2025 – First steps**  
+  The first app skeleton is created – essentially a bare bones structure.
+
+- **11.9.2025 – Prototype**  
+  A first functional prototype appears, with settings and basic features.
+
+- **20.9.2025 – Alpha**  
+  Initial alpha feedback is collected from friends. An admin console for lessons and questions is
+  created.
+
+- **28.9.2025 – Preparation for closed beta**  
+  Key features are completed and closed beta preparations are finalised.
+
+- **“Teraz” – First (closed) beta**  
+  The closed beta is currently running, actively testing with users and collecting feedback.
+
+- **December 2025 – Q1 2026 – Public beta**  
+  Planned public beta release with full access, while work on the final version continues.
+
+- **Q2 – Q3 2026 – Full release**  
+  Planned official launch of the app.
+
+- **Future – Additional subjects**  
+  Long‑term goal: apps and content for more maturita subjects, covering all aspects of exam
+  preparation.
+
+This roadmap sets expectations for testers, shows ongoing progress and provides a sense of strategic
+direction beyond the initial version.
+
+### 2.4 FAQ: practical details for testers
+
+The homepage also includes an FAQ in Slovak that answers typical questions:
+
+- **How do I get access?**  
+  Selected participants are contacted by e‑mail with an APK download link.
+
+- **Is the beta only for Android?**  
+  Yes. The app is currently distributed as an APK only. It is not yet on Google Play or the App
+  Store, and iOS is not supported.
+
+- **Is the beta free?**  
+  Yes. Participation is free of charge; testers “pay” by providing feedback.
+
+- **How do I install the APK?**  
+  Users must enable installation from unknown sources in Android settings, then open the link from
+  the e‑mail and install the APK. A detailed guide will be sent together with the download link.
+
+- **What are the minimum requirements?**  
+  Android 8.0 or higher and at least 100 MB of free storage. Older devices may have lower
+  performance.
+
+- **How do I report bugs and claim a reward?**  
+  Bugs are reported directly in the app (Settings → “Nahlásiť chybu”), including a clear description
+  and reproduction steps. Confirmed bugs are planned to be rewarded with **5 EUR**.
+
+- **How long does the selection process take?**  
+  Selection is gradual and depends on capacity and testing needs. Results are communicated via
+  e‑mail.
+
+- **What happens to my data?**  
+  Data is used only for organising the beta and communication. The FAQ explicitly refers to the
+  detailed **Beta policy** and notes that data will be deleted after the beta ends, in line with the
+  policy.
+
+- **Can I invite friends?**  
+  Testers can share the sign‑up link, but the number of participants is limited.
+
+- **Who can I contact with questions?**  
+  There is a support e‑mail: **podpora@matur.sk**.
+
+
+3. Beta sign‑up page (“Beta” route)
+-----------------------------------
+
+The dedicated beta route currently states that **sign‑ups for the closed beta are closed**. It
+addresses users who already applied:
+
+- It confirms that registration is closed and distribution is being prepared.
+- It tells applicants that if they signed up, they will receive an e‑mail with further steps.
+- It promises an e‑mail containing the APK download link and installation instructions once the
+  build is ready.
+- It points users to the **Beta policy** page for more details on data processing.
+
+Originally, this page also hosted the application form; now it serves as a status and information
+page for applicants awaiting response.
+
+
+4. Legal and privacy pages
+--------------------------
+
+### 4.1 “Beta policy”
+
+This page is a concise privacy and participation policy for the beta:
+
+- **Purpose of beta testing**  
+  To verify the app’s functionality, stability, performance and usability before wider release.
+
+- **Eligible participants**  
+  Primarily **secondary‑school students preparing for maturita** (approx. 17–19 years). Access is
+  capacity‑limited and granted manually.
+
+- **Scope of processed data**  
+  - Identification: first and last name.
+  - Contact: e‑mail.
+  - Study data: school, grade/year, city/region.
+  - Technical: device model and operating system.
+  - Optional: maturita subjects, reasons for interest.
+  - Operational: date and time of application.
+
+- **Purpose and retention**  
+  Data is used solely for organising the beta, communicating with participants, conducting testing
+  analytics and improving the product. Data will be stored **for the duration of the beta**, at the
+  latest until **1.11.2025**, unless law or legitimate interest requires a longer period.
+
+- **Legal basis**  
+  The legal basis is the participant’s consent, expressed by submitting the beta application. Consent
+  can be withdrawn at any time, without affecting the lawfulness of earlier processing.
+
+- **Use of processors / third parties**  
+  The project may use service providers (e.g. hosting, e‑mail). These processors act only on the
+  controller’s instructions and under appropriate security measures.
+
+- **User rights**  
+  Participants are informed of their rights:
+  - access to data,
+  - rectification,
+  - erasure (“right to be forgotten”),
+  - objection and restriction of processing,
+  - withdrawal of consent.
+
+  Rights can be exercised by contacting **podpora@matur.sk**.
+
+- **Beta‑specific disclaimers**  
+  The policy emphasises that beta versions may contain errors, may be unstable and that features or
+  content can change without notice. The beta is not intended for production use.
+
+- **Data controller**  
+  The controller is “Matur”, contact **podpora@matur.sk**.
+
+- **Validity and updates**  
+  The policy is effective from the date of publication and may be updated. The current version is
+  always available on this page. Users already accepted into the closed beta are asked to also read
+  the **CBETA terms**.
+
+### 4.2 Closed‑beta terms of service (CBETA)
+
+The CBETA page defines contractual conditions between the app operator (“Prevádzkovateľ”) and the
+Tester in the closed beta. Key points:
+
+- **Definitions**  
+  CBETA is a closed, invite‑only testing phase. Test builds are experimental and may contain bugs,
+  unfinished features and diagnostic tools. Feedback includes bug reports, suggestions, logs,
+  screenshots and other information. “Neverejné informácie” (non‑public information) covers all
+  non‑public product details, roadmaps, pricing, internal processes and data obtained in testing.
+
+- **Eligibility and access**  
+  Access is granted individually by the operator, who may refuse or revoke access at any time without
+  reason. Testers must be legally competent; minors need parental consent. Access is non‑transferable
+  and testers must not share installers or credentials.
+
+- **Confidentiality (NDA)**  
+  Testers must keep all non‑public information confidential during participation and for 3 years
+  after CBETA ends (or until the information becomes public without breach). They must not publish or
+  share screenshots, videos, feature descriptions, performance measurements, etc. without prior
+  written consent. Breach of confidentiality may lead to termination and possible claims.
+
+- **Feedback and intellectual property**  
+  Testers grant the operator a broad licence to use feedback (including ideas and suggestions) for
+  improving the product, without any obligation to provide compensation.  
+
+- **Use of test builds**  
+  Builds are provided solely for evaluation, internal testing and product improvement. They are not
+  for production use. Testers must not reverse‑engineer, decompile, bypass security mechanisms or
+  redistribute test builds. Updates should be installed without undue delay; older builds may be
+  deactivated.
+
+- **Compatibility and technical requirements**  
+  CBETA may be limited to selected Android versions and devices; compatibility is not guaranteed and
+  may change. Testers are responsible for backing up their own data and securing their device.
+
+- **Data protection in CBETA**  
+  Personal data processing follows the Beta policy and applicable law. CBETA may additionally collect
+  extended diagnostics (crash reports, performance metrics, aggregated interaction data) solely to
+  improve quality and stability. The legal basis is tester consent and/or the operator’s legitimate
+  interest.
+
+- **Warranties and limitation of liability**  
+  Test builds are provided “as is”, without any explicit or implied warranties, including fitness for
+  a particular purpose or uninterrupted availability. The operator’s overall liability to a tester is
+  capped at **50 EUR**, except where mandatory law requires otherwise. The operator is not liable for
+  lost profit, data loss, business interruption or indirect / consequential damage.
+
+- **Indemnification**  
+  Testers agree to indemnify the operator against third‑party claims resulting from their breach of
+  CBETA terms or infringement of third‑party rights.
+
+- **Duration and termination**  
+  CBETA terms take effect when a tester is admitted and remain valid until their participation ends.
+  The operator can terminate participation with immediate effect; testers can end participation by
+  uninstalling test builds and notifying the operator. After termination, testers must delete test
+  builds and stop using non‑public information.
+
+- **Governing law, disputes and changes**  
+  Slovak law applies; disputes fall under Slovak courts at the operator’s seat. The operator may
+  modify CBETA terms at any time; changes take effect once published and continued participation
+  implies acceptance. If any provision is invalid, the rest remain in force. The document forms the
+  entire agreement regarding CBETA. The contact for questions is again **podpora@matur.sk**.
+
+
+5. CBETA dashboard and authentication
+-------------------------------------
+
+The `/cbeta` section is a small authenticated “portal” for invited testers:
+
+- **Login and signup**  
+  - Login page: e‑mail + password form, with error display.
+  - Signup page: checks whether the e‑mail is on an allowlist. If not allowed, access is denied with
+    a message that the e‑mail is not authorised for the closed CBETA and the user can try another
+    account.
+  - When allowed, the page explains password requirements (at least 12 characters, combination of
+    uppercase, lowercase, number and symbol).
+
+- **Dashboard**  
+  The dashboard shows:
+  - A CBETA overview header and a logout option.
+  - An **APK download** block:
+    - On mobile, testers can register and download via Firebase App Distribution.
+    - On desktop, they are told to open the page on Android or scan a QR code with their phone.
+  - A link to the **CBETA terms** page (“Podmienky CBETA”), with a note that they should be read
+    before use.
+  - A **bug console** block linking to a separate bug‑tracking site (`bugs.matur.sk`) where testers
+    can claim rewards for bugs reported from within the app and see the status of their reports.
+
+Together, this closed area implements the operational workflow of the beta: controlled enrolment,
+distribution of test builds and structured bug reporting, all bound by the legal and privacy
+framework described above.
+

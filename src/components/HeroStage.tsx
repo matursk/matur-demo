@@ -40,11 +40,11 @@ export default function HeroStage() {
 								className="block w-full text-pretty break-words mx-auto md:inline-block md:w-auto md:break-normal md:mx-0"
 								brandClassName="text-primary"
 								phrases={[
-									'Z*matur*ujem na jednotku.',
-									'*Matur*ita jednoducho.',
-									'*Matur*ita, formalita.',
-									'Z*matur*ujem bez stresu.',
-									'*Matur*ita s prehľadom.',
+									'Škola, kde *Matur*ita nie je strašiak.',
+									'*Matur* dá príprave systém.',
+									'Váš tím + *Matur* = spokojní maturanti.',
+									'Digitálna príprava na *Matur*itu.',
+									'Maturitu zvládneme spoločne.',
 								]}
 							/>
 						</motion.h1>
@@ -55,7 +55,7 @@ export default function HeroStage() {
 								scale: state === 'heroVisible' ? titleScale : undefined,
 							}}
 						>
-							Najefektívnejšia príprava na maturitu pre vašu školu.
+							Komplexná platforma pre školy – maturitné okruhy, adaptívne cvičenia aj prehľady pre vedenie v jednom balíku.
 						</motion.p>
 						<motion.div
 							className="mt-6"
